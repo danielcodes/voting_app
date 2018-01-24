@@ -8,21 +8,18 @@ from rest_framework_simplejwt.views import (
 
 from rest_framework import views, serializers, status
 from rest_framework.response import Response
+from rest_framework.routers import DefaultRouter
 
+from polls import views
 
-class MessageSerializer(serializers.Serializer):
-    message = serializers.CharField()
-
-
-class EchoView(views.APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = MessageSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED)
-
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r'questions', views.QuestionViewSet)
+router.register(r'choices', views.ChoiceViewSet)
+router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
+    url(r'^', include(router.urls)),
     url(r'^$', generic.RedirectView.as_view(
          url='/api/', permanent=False)),
     url(r'^api/$', get_schema_view()),
@@ -30,5 +27,4 @@ urlpatterns = [
         'rest_framework.urls', namespace='rest_framework')),
     url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
     url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
-    url(r'^api/echo/$', EchoView.as_view()),
 ]
