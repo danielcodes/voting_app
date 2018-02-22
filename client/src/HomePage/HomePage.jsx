@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { userActions } from '../_actions';
+import { userActions, questionActions } from '../_actions';
 
 
 class HomePage extends React.Component {
 	componentDidMount() {
-		this.props.dispatch(userActions.getAll());
+		this.props.dispatch(questionActions.getAll());
 	}
 
 	handleDeleteUser(id) {
@@ -14,32 +14,29 @@ class HomePage extends React.Component {
 	}
 
 	render() {
-		const { user, users } = this.props;
+		const { user, users, questions } = this.props;
 		return (
 			<div>
-				<h1>Hi {user.username}!</h1>
-
-				<h3>Users from secure api end point:</h3>
-				{users.loading && <em>Loading users...</em>}
-				{users.error && <span className="text-danger">ERROR: {users.error}</span>}
-				{users.items &&
+				<h2>These are the current polls</h2>
+				{questions.items &&
 					<ul>
-						{users.items.map((user, index) =>
-							<li key={user.username}> {user.username} </li>
+						{questions.items.map((question, index) =>
+							<li key={question.name}> {question.name} </li>
 						)}
 					</ul>
 				}
+
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state) {
-	const { users, authentication } = state;
+	const { authentication, questions } = state;
 	const { user } = authentication;
 	return {
 		user,
-		users
+		questions
 	};
 }
 
