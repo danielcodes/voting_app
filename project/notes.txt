@@ -1,0 +1,28 @@
+
+Things that I need to build out
+
+[x] Separate the user model into its own separate app
+--- [ ] look into extending the user model
+
+[x] Extend signature time, too short
+[x] Add in the backend for creating polls and options
+[ ] Return the username when a user request the JWT, not just the token
+
+
+=====================================================================
+
+Testing the API with httpie
+Typical requset goes like this
+'http :8000/<path>/'
+'http POST :8000/<path> <args>', pass args one by one
+
+since I've got the JWT auth set up, first I need to obtain the token
+Also, need to have an additional package, httpie-jwt-auth
+Before making the request, need to set up two env variables,
+-JWT_AUTH_PREFIX=JWT, this is depends, can be 'Bearer' in other apps
+-JWT_AUTH_TOKEN=<token>
+
+You are set, make request with
+'http --auth-type=jwt -v <url> <args>'
+
+=====================================================================
