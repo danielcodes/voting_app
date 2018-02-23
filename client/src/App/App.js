@@ -14,6 +14,7 @@ import { LoginPage } from '../LoginPage';
 import { LandingPage } from '../LandingPage';
 import { SignUpPage } from '../SignUpPage';
 import { AboutPage } from '../AboutPage';
+import { QuestionPage } from '../QuestionPage';
 import { NotFoundPage } from '../NotFoundPage';
 
 import {
@@ -75,6 +76,7 @@ class App extends Component {
 						<Route path="/about" component={AboutPage} />
 						<Route path="/login" component={LoginPage} />
 						<Route path="/signup" component={SignUpPage} />
+						<Route path="/questions/:id" component={QuestionPage} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</Segment>

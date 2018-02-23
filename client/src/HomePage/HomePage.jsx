@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userActions, questionActions } from '../_actions';
+
+import { Card, List } from 'semantic-ui-react'
 
 
 class HomePage extends React.Component {
@@ -19,13 +22,14 @@ class HomePage extends React.Component {
 			<div>
 				<h2>These are the current polls</h2>
 				{questions.items &&
-					<ul>
+					<List>
 						{questions.items.map((question, index) =>
-							<li key={question.name}> {question.name} </li>
+							<List.Item as={Link} to={`questions/${index}`} key={question.name}> 
+								{question.name}
+							</List.Item>
 						)}
-					</ul>
+					</List>
 				}
-
 			</div>
 		);
 	}
