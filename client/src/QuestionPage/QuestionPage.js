@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { questionActions } from '../_actions';
 
 
 class QuestionPage extends React.Component {
-	// retrieve it's own data
-	// another hit to retrieve the choices associated with this question
-	// need to think about the UI for voting mechanism
 
 	constructor(props) {
 		super(props);
@@ -22,18 +22,34 @@ class QuestionPage extends React.Component {
 		// questions/:id/choices? so create my own route
 		// yup, gotta touch the backend
 		
-		//this.props.dispatch(questionActions.getAll());
+		this.props.dispatch(questionActions.getQuestion(match.params.id));
 	}
 
 
 	render() {
 		const { match } = this.props;
+		const { question } = this.props;
+
 		return (
 			<div>
-				<h3>Question ID: {match.params.id}</h3>
+				{question.item && <h1>{question.item.name}</h1>}
+				<h2>Choices are:</h2>
+				<div>
+					<ul>
+						<li>Choice 1</li>
+						<li>Choice 2</li>
+					</ul>
+				</div>
 			</div>
 		);
 	}
 }
 
-export { QuestionPage };
+function mapStateToProps(state) {
+	const { question } = state;
+	return {
+		question
+	}
+}
+const connectedQuestionPage = connect(mapStateToProps)(QuestionPage);
+export { connectedQuestionPage as QuestionPage };

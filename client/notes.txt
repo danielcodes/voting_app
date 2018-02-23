@@ -10,6 +10,10 @@ Frontend things
 [ ] have some type of loader before the data is loaded in the page
 
 
+Notes
+On first render, data is being fetched, so it isn't available right away
+to mitigate this, do {data.object && what you actually want to render}, this looks ugly..
+also what forces the re-render once the data comes in?
 
 
 User stories

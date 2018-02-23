@@ -24,7 +24,7 @@ class HomePage extends React.Component {
 				{questions.items &&
 					<List>
 						{questions.items.map((question, index) =>
-							<List.Item as={Link} to={`questions/${index}`} key={question.name}> 
+							<List.Item as={Link} to={`questions/${index+1}`} key={question.name}>
 								{question.name}
 							</List.Item>
 						)}

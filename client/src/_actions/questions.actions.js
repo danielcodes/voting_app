@@ -3,9 +3,25 @@ import { questionService } from '../_services';
 import { history } from '../_helpers';
 
 export const questionActions = {
+	getQuestion,
 	getAll
 };
 
+function getQuestion(id) {
+	return dispatch => {
+		dispatch(request({ id }));
+
+		questionService.getQuestion(id)
+			.then(
+				question => dispatch(success(question)),
+				error => dispatch(failure(error))
+			);
+	}
+
+	function request(question) { return { type: questionConstants.GET_REQUEST, question } }
+	function success(question) { return { type: questionConstants.GET_SUCCESS, question } }
+	function failure(error) { return { type: questionConstants.GET_FAILURE, error } }
+}
 
 function getAll() {
 	return dispatch => {
