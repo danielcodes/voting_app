@@ -4,7 +4,10 @@ Frontend things
 -make the 2 requests to the backend to retrieve info on the question and the list of choices
 
 [x] parametrize the list items into that will link into their own pages, questions/<id>
-[ ] turn questions into a nicer list
+
+-make request to the back to get the choices for each question
+-display the number of votes on each choice
+-add in event handlers to vote for a choice
 
 [ ] highlight proper tab, stuck in home
 [ ] have some type of loader before the data is loaded in the page

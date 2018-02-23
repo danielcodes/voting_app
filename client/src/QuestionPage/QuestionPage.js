@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { questionActions } from '../_actions';
+import { choiceActions } from '../_actions';
+
+import { List } from 'semantic-ui-react'
 
 
 class QuestionPage extends React.Component {
@@ -23,32 +26,37 @@ class QuestionPage extends React.Component {
 		// yup, gotta touch the backend
 		
 		this.props.dispatch(questionActions.getQuestion(match.params.id));
+		this.props.dispatch(choiceActions.getChoices(match.params.id));
 	}
 
 
 	render() {
-		const { match } = this.props;
-		const { question } = this.props;
+		const { match, question, choices } = this.props;
 
 		return (
 			<div>
 				{question.item && <h1>{question.item.name}</h1>}
 				<h2>Choices are:</h2>
-				<div>
-					<ul>
-						<li>Choice 1</li>
-						<li>Choice 2</li>
-					</ul>
-				</div>
+
+				{choices.items &&
+					<List>
+						{choices.items.map((choice, index) =>
+							<List.Item key={choice.choice_text}>
+								{choice.choice_text} | Votes: {choice.votes}
+							</List.Item>
+						)}
+					</List>
+				}
 			</div>
 		);
 	}
 }
 
 function mapStateToProps(state) {
-	const { question } = state;
+	const { question, choices } = state;
 	return {
-		question
+		question,
+		choices,
 	}
 }
 const connectedQuestionPage = connect(mapStateToProps)(QuestionPage);

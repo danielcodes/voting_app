@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { userActions, questionActions } from '../_actions';
 
-import { Card, List } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react'
 
 
 class HomePage extends React.Component {
