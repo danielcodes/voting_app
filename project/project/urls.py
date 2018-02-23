@@ -16,6 +16,7 @@ router.register(r'users', AccountsViews.UserViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^questions/(?P<pk>[0-9]+)/choices/$', PollsViews.choices_list),
     url(r'^auth/', include('djoser.urls')),
     url(r'^auth/', include('djoser.urls.jwt')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

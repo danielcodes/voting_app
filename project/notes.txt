@@ -6,8 +6,10 @@ Things that I need to build out
 
 [x] Extend signature time, too short
 [x] Add in the backend for creating polls and options
-[ ] Return the username when a user request the JWT, not just the token
+[x] create custom route for '/questions/:id/choices' to get question choices
 
+
+[ ] Return the username when a user request the JWT, not just the token
 
 =====================================================================
 
