@@ -15,7 +15,8 @@ export function choices(state = {}, action) {
         error: action.error
       };
 		case choiceConstants.VOTE_SUCCESS:
-			let updated = []
+			// iterate through array and replace the updated one
+			let updated = [];
 			for(let i=0; i<state.items.length; i++){
 				if(state.items[i].id == action.choice.id){
 					updated.push(action.choice);
@@ -24,11 +25,13 @@ export function choices(state = {}, action) {
 					updated.push(state.items[i]);
 				}
 			}
-
+			return { items: updated };
+		case choiceConstants.NEW_CHOICE_SUCCESS:
+			// append a new item to the end of the list
 			return {
-				items: updated
+				items: [...state.items, action.choice]
 			};
     default:
-      return state
+      return state;
   }
 }

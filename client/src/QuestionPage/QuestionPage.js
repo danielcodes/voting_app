@@ -35,7 +35,11 @@ class QuestionPage extends React.Component {
 	}
 
 	handleNewChoice(e) {
+		const { match, dispatch } = this.props;
 		const { newChoice } = this.state;
+
+		dispatch(choiceActions.addNewChoice(match.params.id, newChoice));
+		this.setState({ 'newChoice': '' })
 	}
 
 	handleVoting(e) {

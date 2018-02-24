@@ -1,9 +1,25 @@
 import { authHeader } from '../_helpers';
 
 export const choiceService = {
+	addNewChoice,
 	voteForChoice,
 	getChoices,
 };
+
+function addNewChoice(id, text) {
+	const requestOptions = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			question: id,
+			choice_text: text
+		})
+	};
+
+	const url = `/choices/`;
+
+	return fetch(url, requestOptions).then(handleResponse);
+}
 
 function voteForChoice(id, count) {
 	const requestOptions = {
