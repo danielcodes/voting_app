@@ -10,9 +10,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
 
 @api_view(['GET'])
 def choices_list(request, pk):
