@@ -14,7 +14,6 @@ export function choices(state = {}, action) {
       return {
         error: action.error
       };
-		// figure out how to just update the item in the the array and not the whole thing
 		case choiceConstants.VOTE_SUCCESS:
 			let updated = []
 			for(let i=0; i<state.items.length; i++){

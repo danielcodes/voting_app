@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { questionActions } from '../_actions';
 import { choiceActions } from '../_actions';
 
-import { Button, List } from 'semantic-ui-react'
+import { Button, Input, List } from 'semantic-ui-react'
 
 
 class QuestionPage extends React.Component {
@@ -13,9 +13,12 @@ class QuestionPage extends React.Component {
 		super(props);
 
 		this.state = {
+			newChoice: '',
 			voted: false
 		};
 
+		this.handleOnChange = this.handleOnChange.bind(this);
+		this.handleNewChoice = this.handleNewChoice.bind(this);
 		this.handleVoting = this.handleVoting.bind(this);
 	}
 
@@ -24,6 +27,15 @@ class QuestionPage extends React.Component {
 		
 		dispatch(questionActions.getQuestion(match.params.id));
 		dispatch(choiceActions.getChoices(match.params.id));
+	}
+
+	handleOnChange(e) {
+		const { name, value } = e.target;
+		this.setState({ [name]: value })
+	}
+
+	handleNewChoice(e) {
+		const { newChoice } = this.state;
 	}
 
 	handleVoting(e) {
@@ -39,7 +51,7 @@ class QuestionPage extends React.Component {
 
 	render() {
 		const { match, question, choices } = this.props;
-		const { voted } = this.state;
+		const { newChoice, voted } = this.state;
 
 		return (
 			<div>
@@ -63,6 +75,20 @@ class QuestionPage extends React.Component {
 									/>}
 							</List.Item>
 						)}
+						<List.Item>
+							<Input
+								name='newChoice'
+								placeholder='New Choice'
+								value={newChoice}
+								onChange={this.handleOnChange}
+							/>
+							<Button
+								color='teal'
+								size='small'
+								content='Add'
+								onClick={this.handleNewChoice}
+							/>
+						</List.Item>
 					</List>
 				}
 			</div>
