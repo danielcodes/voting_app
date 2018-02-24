@@ -1,26 +1,28 @@
 
 Frontend things
-1. can see and vote on the polls
--make the 2 requests to the backend to retrieve info on the question and the list of choices
-
 [x] parametrize the list items into that will link into their own pages, questions/<id>
-
--make request to the back to get the choices for each question
--display the number of votes on each choice
--add in event handlers to vote for a choice
 
 [ ] highlight proper tab, stuck in home
 [ ] have some type of loader before the data is loaded in the page
 
+[ ] look into refreshing the token, doing a re login when it expires
+
+DO NOW
+
+
+Problems
+The API does not require auth, yet I still get unauthorized errors...
 
 Notes
 On first render, data is being fetched, so it isn't available right away
 to mitigate this, do {data.object && what you actually want to render}, this looks ugly..
 also what forces the re-render once the data comes in?
 
+Handle failures in the action file, when the service call fails, do a dispatch so show appropiate message
+Also think about whether the state needs to be changed on failure, hmm
 
 User stories
-[ ] As an unauthenticated or authenticated user, I can see and vote on everyone's polls.
+[x] As an unauthenticated or authenticated user, I can see and vote on everyone's polls.
 [ ] As an authenticated user, I can create a poll with any number of possible items.
 
 [ ] As an authenticated user, I can keep my polls and come back later to access them.

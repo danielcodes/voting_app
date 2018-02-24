@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { questionActions } from '../_actions';
 import { choiceActions } from '../_actions';
 
-import { List } from 'semantic-ui-react'
+import { Button, List } from 'semantic-ui-react'
 
 
 class QuestionPage extends React.Component {
@@ -15,23 +15,31 @@ class QuestionPage extends React.Component {
 		this.state = {
 			voted: false
 		};
+
+		this.handleVoting = this.handleVoting.bind(this);
 	}
 
 	componentDidMount() {
-		const { match } = this.props;
-		// give the id of the question
-		// grab the its own data, questions/<id>
-		// and need something for choices of the questions
-		// questions/:id/choices? so create my own route
-		// yup, gotta touch the backend
+		const { match, dispatch } = this.props;
 		
-		this.props.dispatch(questionActions.getQuestion(match.params.id));
-		this.props.dispatch(choiceActions.getChoices(match.params.id));
+		dispatch(questionActions.getQuestion(match.params.id));
+		dispatch(choiceActions.getChoices(match.params.id));
 	}
 
+	handleVoting(e) {
+		e.preventDefault();
+
+		const { dispatch } = this.props;
+		const { id, value } = e.target; // retrieve id and votes
+		const newCount = parseInt(value) + 1;
+
+		this.setState({ voted: true });
+		dispatch(choiceActions.voteForChoice(id, newCount));
+	}
 
 	render() {
 		const { match, question, choices } = this.props;
+		const { voted } = this.state;
 
 		return (
 			<div>
@@ -43,6 +51,16 @@ class QuestionPage extends React.Component {
 						{choices.items.map((choice, index) =>
 							<List.Item key={choice.choice_text}>
 								{choice.choice_text} | Votes: {choice.votes}
+
+								{!voted &&
+									<Button
+										color='teal'
+										size='small'
+										content='vote'
+										id={choice.id}
+										value={choice.votes}
+										onClick={this.handleVoting}
+									/>}
 							</List.Item>
 						)}
 					</List>
@@ -59,5 +77,6 @@ function mapStateToProps(state) {
 		choices,
 	}
 }
+
 const connectedQuestionPage = connect(mapStateToProps)(QuestionPage);
 export { connectedQuestionPage as QuestionPage };
