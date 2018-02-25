@@ -15,6 +15,7 @@ import { LandingPage } from '../LandingPage';
 import { SignUpPage } from '../SignUpPage';
 import { AboutPage } from '../AboutPage';
 import { QuestionPage } from '../QuestionPage';
+import { NewPollPage } from '../NewPollPage';
 import { NotFoundPage } from '../NotFoundPage';
 
 import {
@@ -56,7 +57,10 @@ class App extends Component {
 							<Menu.Item as={Link} to="/about" >About</Menu.Item>
 							<Menu.Item position='right'>
 								{localStorage.getItem('user') ? (
-									<Button as={Link} inverted={!fixed} to="/login">Log Out</Button>
+									<div>
+										<Button as={Link} to="/new_poll" color="teal">New Poll</Button>
+										<Button as={Link} inverted={!fixed} to="/login">Log Out</Button>
+									</div>
 									) : (
 									<div>
 										<Button as={Link} inverted={!fixed} to="/login">Log In</Button>
@@ -76,6 +80,7 @@ class App extends Component {
 						<Route path="/about" component={AboutPage} />
 						<Route path="/login" component={LoginPage} />
 						<Route path="/signup" component={SignUpPage} />
+						<Route path="/new_poll" component={NewPollPage} />
 						<Route path="/questions/:id" component={QuestionPage} />
 						<Route component={NotFoundPage} />
 					</Switch>

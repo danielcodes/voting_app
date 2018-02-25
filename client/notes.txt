@@ -8,12 +8,10 @@ Frontend things
 [ ] look into refreshing the token, doing a re login when it expires
 
 DO NOW
--create a 'new choice' field in the question page, wire it to the backend too
-
 -add a create poll form for adding polls
--start simple, just a single field for the name of the poll
--redirect after to the page of the poll and then the user can start adding choices
--message that says 'Add your first choice!'
+--when a person is logged in, should return more than a token, need user id
+--one field form, then redirect to question page
+
 
 Problems
 The API does not require auth, yet I still get unauthorized errors... extended token time to 6 hours for now
