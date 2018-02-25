@@ -135,5 +135,7 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=21600)
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=21600),
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'accounts.utils.jwt_response_payload_handler',
 }
