@@ -20,6 +20,15 @@ def choices_list(request, pk):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+def user_questions_list(request, pk):
+    """ Returns questions owned by a user
+    """
+    queryset = Question.objects.filter(owner=pk)
+    serializer = QuestionSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+
 class ChoiceViewSet(viewsets.ModelViewSet):
     queryset = Choice.objects.all()
     serializer_class = ChoiceSerializer
