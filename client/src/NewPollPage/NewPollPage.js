@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { questionActions } from '../_actions';
 
 import { Button, Input, List } from 'semantic-ui-react'
 
@@ -21,7 +24,10 @@ class NewPollPage extends React.Component {
 	}
 
 	handleNewPoll(e) {
+		const { dispatch } = this.props;
 		const { newPoll }	= this.state;
+
+		dispatch(questionActions.addQuestion(newPoll));
 	}
 
 	handleOnChange(e) {
@@ -54,4 +60,5 @@ class NewPollPage extends React.Component {
 	}
 }
 
-export { NewPollPage };
+const connectedNewPollPage = connect()(NewPollPage);
+export { connectedNewPollPage as NewPollPage };

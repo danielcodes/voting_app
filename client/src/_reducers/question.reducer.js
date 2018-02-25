@@ -14,6 +14,10 @@ export function question(state = {}, action) {
       return { 
         error: action.error
       };
+    case questionConstants.NEW_QUES_SUCCESS:
+      return {
+        item: action.question
+      };
     default:
       return state
   }
