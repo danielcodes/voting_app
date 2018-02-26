@@ -20,8 +20,6 @@ class MyPollsPage extends React.Component {
 	}
 
 	handleDeleteQuestion(e) {
-		// action to delete a question
-		// just need the id of the question
 		let ques_id = e.target.value;
 		this.props.dispatch(questionActions.deleteQuestion(ques_id));
 	}

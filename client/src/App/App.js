@@ -8,7 +8,6 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
-import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { LandingPage } from '../LandingPage';
@@ -75,8 +74,7 @@ class App extends Component {
 					{alert.message && <Message compact color={alert.type} content={alert.message}/>}
 
 					<Switch>
-						<PrivateRoute exact path="/" component={HomePage} />
-						<Route path="/home" component={LandingPage} />
+						<Route exact path="/" component={HomePage} />
 						<Route path="/about" component={AboutPage} />
 						<Route path="/login" component={LoginPage} />
 						<Route path="/signup" component={SignUpPage} />

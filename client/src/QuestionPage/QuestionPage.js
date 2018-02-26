@@ -79,20 +79,22 @@ class QuestionPage extends React.Component {
 									/>}
 							</List.Item>
 						)}
-						<List.Item>
-							<Input
-								name='newChoice'
-								placeholder='New Choice'
-								value={newChoice}
-								onChange={this.handleOnChange}
-							/>
-							<Button
-								color='teal'
-								size='small'
-								content='Add'
-								onClick={this.handleNewChoice}
-							/>
-						</List.Item>
+						{localStorage.getItem('user') &&
+							<List.Item>
+								<Input
+									name='newChoice'
+									placeholder='New Choice'
+									value={newChoice}
+									onChange={this.handleOnChange}
+								/>
+								<Button
+									color='teal'
+									size='mini'
+									content='Add'
+									onClick={this.handleNewChoice}
+								/>
+							</List.Item>
+						}
 					</List>
 				}
 			</div>

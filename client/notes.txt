@@ -8,11 +8,12 @@ Frontend things
 [ ] look into refreshing the token, doing a re login when it expires
 
 DO NOW
--add a delete button on the 'my polls' list
-
 -start replacing dummy landing page with the list of polls
+
 -restrict adding new options to poll only to authenticated users
 -clean up warnings
+
+-start looking into some graph library to add the pie chart / bar graphs
 
 
 Problems
