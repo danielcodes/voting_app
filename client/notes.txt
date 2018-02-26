@@ -8,12 +8,10 @@ Frontend things
 [ ] look into refreshing the token, doing a re login when it expires
 
 DO NOW
--create a my polls tab for authenticated users? next to log out, will hit 2 user stories
--similar to homepage, just a get on questions, api call is different, only want questions where 
+-add a delete button on the 'my polls' list
 
--start thinking about restrictios to make on the polls
---if I'm viewing a poll, the only option I have is to vote and add new potions
-
+-start replacing dummy landing page with the list of polls
+-restrict adding new options to poll only to authenticated users
 -clean up warnings
 
 
@@ -32,9 +30,9 @@ User stories
 [x] As an unauthenticated or authenticated user, I can see and vote on everyone's polls.
 [x] As an authenticated user, I can create a poll with any number of possible items.
 
-[ ] As an authenticated user, I can keep my polls and come back later to access them.
-[ ] As an authenticated user, I can delete polls that I decide I don't want anymore.
-[ ] As an authenticated user, if I don't like the options on a poll, I can create a new option.
+[x] As an authenticated user, I can keep my polls and come back later to access them.
+[x] As an authenticated user, I can delete polls that I decide I don't want anymore.
+[x] As an authenticated user, if I don't like the options on a poll, I can create a new option.
 
 [ ] As an unauthenticated or authenticated user, I can see the results of polls in chart form. 
 	(This could be implemented using Chart.js or Google Charts.)

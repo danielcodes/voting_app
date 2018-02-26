@@ -22,6 +22,17 @@ export function questions(state = {}, action) {
 			return {
 				items: action.questions
 			};
+    case questionConstants.DEL_QUES_SUCCESS:
+			let updated = [];
+			let ques_id = parseInt(action.question);
+			for(let i=0; i<state.items.length; i++){
+				if(state.items[i].id !== ques_id){
+					updated.push(state.items[i]);
+				}
+			}
+      return {
+        items: updated
+      };
     default:
       return state
   }

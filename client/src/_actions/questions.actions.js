@@ -5,6 +5,7 @@ import { history } from '../_helpers';
 
 export const questionActions = {
 	addQuestion,
+	deleteQuestion,
 	getQuestion,
 	getUserQuestions,
 	getAll
@@ -79,4 +80,26 @@ function getUserQuestions(user_id) {
 	function request() { return { type: questionConstants.GET_USER_QUES_REQUEST } }
 	function success(questions) { return { type: questionConstants.GET_USER_QUES_SUCCESS, questions } }
 	function failure(error) { return { type: questionConstants.GET_USER_QUES_FAILURE, error } }
+}
+
+function deleteQuestion(ques_id) {
+	return dispatch => {
+		dispatch(request({ ques_id }));
+
+		questionService.deleteQuestion(ques_id)
+			.then(
+				() => {
+					dispatch(success(ques_id))
+					dispatch(alertActions.success('Successfully deleted question.'));
+				},
+				error => {
+					dispatch(failure(error))
+					dispatch(alertActions.error(error));
+				}
+			);
+	}
+
+	function request(question) { return { type: questionConstants.DEL_QUES_REQUEST, question } }
+	function success(question) { return { type: questionConstants.DEL_QUES_SUCCESS, question } }
+	function failure(error) { return { type: questionConstants.DEL_QUES_FAILURE, error } }
 }
