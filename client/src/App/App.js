@@ -16,6 +16,7 @@ import { SignUpPage } from '../SignUpPage';
 import { AboutPage } from '../AboutPage';
 import { QuestionPage } from '../QuestionPage';
 import { NewPollPage } from '../NewPollPage';
+import { MyPollsPage } from '../MyPollsPage';
 import { NotFoundPage } from '../NotFoundPage';
 
 import {
@@ -55,20 +56,19 @@ class App extends Component {
 						<Container>
 							<Menu.Item as={Link} to="/" active>Home</Menu.Item>
 							<Menu.Item as={Link} to="/about" >About</Menu.Item>
-							<Menu.Item position='right'>
-								{localStorage.getItem('user') ? (
-									<div>
-										<Button as={Link} to="/new_poll" color="teal">New Poll</Button>
-										<Button as={Link} inverted={!fixed} to="/login">Log Out</Button>
-									</div>
-									) : (
-									<div>
-										<Button as={Link} inverted={!fixed} to="/login">Log In</Button>
-										<Button as={Link} inverted={!fixed} to="/signup" primary={fixed} style={{ marginLeft: '0.5em' }}>Sign Up</Button>
-									</div>
-									)
-								}
-							</Menu.Item>
+							{localStorage.getItem('user') ? (
+								<Menu.Item position='right'>
+									<Button as={Link} to="/new_poll" color="teal">New Poll</Button>
+									<Button as={Link} to="/polls" style={{ marginLeft: '0.5em' }}>My Polls</Button>
+									<Button as={Link} inverted={!fixed} to="/login" style={{ marginLeft: '0.5em' }}>Log Out</Button>
+								</Menu.Item>
+								) : (
+								<Menu.Item position='right'>
+									<Button as={Link} inverted={!fixed} to="/login">Log In</Button>
+									<Button as={Link} inverted={!fixed} to="/signup" primary={fixed} style={{ marginLeft: '0.5em' }}>Sign Up</Button>
+								</Menu.Item>
+								)
+							}
 						</Container>
 					</Menu>
 
@@ -82,6 +82,7 @@ class App extends Component {
 						<Route path="/signup" component={SignUpPage} />
 						<Route path="/new_poll" component={NewPollPage} />
 						<Route path="/questions/:id" component={QuestionPage} />
+						<Route path="/polls" component={MyPollsPage} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</Segment>
