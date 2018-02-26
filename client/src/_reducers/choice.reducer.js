@@ -18,7 +18,7 @@ export function choices(state = {}, action) {
 			// iterate through array and replace the updated one
 			let updated = [];
 			for(let i=0; i<state.items.length; i++){
-				if(state.items[i].id == action.choice.id){
+				if(state.items[i].id === action.choice.id){
 					updated.push(action.choice);
 				}
 				else {

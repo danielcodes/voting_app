@@ -9,8 +9,12 @@ Frontend things
 
 DO NOW
 -create a my polls tab for authenticated users? next to log out, will hit 2 user stories
+-similar to homepage, just a get on questions, api call is different, only want questions where 
+
 -start thinking about restrictios to make on the polls
 --if I'm viewing a poll, the only option I have is to vote and add new potions
+
+-clean up warnings
 
 
 Problems

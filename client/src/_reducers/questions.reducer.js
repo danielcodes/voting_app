@@ -14,6 +14,14 @@ export function questions(state = {}, action) {
       return { 
         error: action.error
       };
+		case questionConstants.GET_USER_QUES_REQUEST:
+			return {
+				loading: true
+			};
+		case questionConstants.GET_USER_QUES_SUCCESS:
+			return {
+				items: action.questions
+			};
     default:
       return state
   }

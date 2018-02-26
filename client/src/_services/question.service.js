@@ -3,6 +3,7 @@ import { authHeader } from '../_helpers';
 export const questionService = {
 	addQuestion,
 	getQuestion,
+	getUserQuestions,
 	getAll
 };
 
@@ -30,6 +31,16 @@ function getQuestion(id) {
 		headers: authHeader()
 	};
 	const url = `/questions/${id}`;
+
+	return fetch(url, requestOptions).then(handleResponse);
+}
+
+function getUserQuestions(user_id) {
+	const requestOptions = {
+		method: 'GET',
+		headers: authHeader()
+	};
+	const url = `/questions/user/${user_id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }

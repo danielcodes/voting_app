@@ -6,6 +6,7 @@ import { history } from '../_helpers';
 export const questionActions = {
 	addQuestion,
 	getQuestion,
+	getUserQuestions,
 	getAll
 };
 
@@ -62,4 +63,20 @@ function addQuestion(question) {
 	function request(question) { return { type: questionConstants.NEW_QUES_REQUEST, question } }
 	function success(question) { return { type: questionConstants.NEW_QUES_SUCCESS, question } }
 	function failure(error) { return { type: questionConstants.NEW_QUES_FAILURE, error } }
+}
+
+function getUserQuestions(user_id) {
+	return dispatch => {
+		dispatch(request());
+
+		questionService.getUserQuestions(user_id)
+			.then(
+				questions => dispatch(success(questions)),
+				error => dispatch(failure(error))
+			);
+	};
+
+	function request() { return { type: questionConstants.GET_USER_QUES_REQUEST } }
+	function success(questions) { return { type: questionConstants.GET_USER_QUES_SUCCESS, questions } }
+	function failure(error) { return { type: questionConstants.GET_USER_QUES_FAILURE, error } }
 }
