@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { questionActions } from '../_actions';
 
-import { Button, Input, List } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, List, TextArea } from 'semantic-ui-react'
 
 
 class NewPollPage extends React.Component {
@@ -39,23 +39,35 @@ class NewPollPage extends React.Component {
 		const { newPoll } = this.state;
 
 		return (
-			<div>
-				<h2>Create a new poll</h2>
-					<div>
-						<Input
-							name='newPoll'
-							placeholder='New poll'
-							value={newPoll}
-							onChange={this.handleOnChange}
-						/>
-						<Button
-							color='teal'
-							size='medium'
-							content='Create poll'
-							onClick={this.handleNewPoll}
-						/>
-					</div>
-			</div>
+			<Grid>
+				<Grid.Row centered colums={4}>
+					<Header as='h1' color='teal'>
+						Create a new poll
+					</Header>
+				</Grid.Row>
+
+				<Grid.Row centered columns={3}>
+					<Grid.Column>
+						<Form>
+							<TextArea
+								autoHeight
+								name='newPoll'
+								placeholder='ie. Favorite pizza slice'
+								value={newPoll}
+								onChange={this.handleOnChange}
+							/>
+							<Button
+								fluid
+								color='teal'
+								size='medium'
+								content='Create poll'
+								style={{ marginTop: '0.5em' }}
+								onClick={this.handleNewPoll}
+							/>
+						</Form>
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
 		);
 	}
 }

@@ -9,10 +9,11 @@ Frontend things
 
 DO NOW
 -give the page a make over
---front page, nice viewing of the polls
---a descriptive about page
+--create new poll page
 --separate choices to vote on to the left and place pie chart on the right
---fix up my polls page to have the same style as the main page
+
+--add those nice loading transitions for segment when data is being loaded
+--a descriptive about page
 
 -clean up warnings
 -a smudge renders when there is an option but not votes, fix that
