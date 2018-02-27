@@ -1,0 +1,5 @@
+.poll-item:hover {
+	background-color: teal;
+	font-weight: 900;
+	cursor: pointer;
+}

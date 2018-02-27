@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userActions, questionActions } from '../_actions';
+import { history } from '../_helpers';
 
-import { List } from 'semantic-ui-react'
+import { Header, Grid, List, Segment } from 'semantic-ui-react';
+
+import './HomePage.css';
 
 
 class HomePage extends React.Component {
@@ -16,21 +19,42 @@ class HomePage extends React.Component {
 		return (e) => this.props.dispatch(userActions.delete(id));
 	}
 
+	handleQuestionClick(e) {
+		let ques_id = e.target.getAttribute('value');
+		history.push(`questions/${ques_id}`);
+	}
+
 	render() {
 		const { user, users, questions } = this.props;
+
 		return (
-			<div>
-				<h2>These are the current polls</h2>
-				{questions.items &&
-					<List>
-						{questions.items.map((question, index) =>
-							<List.Item as={Link} to={`questions/${question.id}`} key={question.name}>
-								{question.name}
-							</List.Item>
-						)}
-					</List>
-				}
-			</div>
+			<Grid>
+				<Grid.Row centered colums={4}>
+					<Header as='h1' color='teal'>
+						Welcome to Pollster
+					</Header>
+				</Grid.Row>
+
+				<Grid.Row centered columns={2}>
+					<Grid.Column>
+						{questions.items &&
+							<Segment.Group>
+								{questions.items.map((question, index) =>
+									<Segment
+										className='poll-item'
+										color='teal'
+										key={question.id}
+										value={question.id}
+										onClick={this.handleQuestionClick}
+										>
+										{question.name}
+									</Segment>
+								)}
+							</Segment.Group>
+						}
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
 		);
 	}
 }

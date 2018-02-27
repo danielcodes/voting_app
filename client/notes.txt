@@ -15,6 +15,7 @@ DO NOW
 --fix up my polls page to have the same style as the main page
 
 -clean up warnings
+-a smudge renders when there is an option but not votes, fix that
 
 
 Problems
