@@ -10,7 +10,6 @@ import { history } from '../_helpers';
 import { alertActions } from '../_actions';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
-import { LandingPage } from '../LandingPage';
 import { SignUpPage } from '../SignUpPage';
 import { AboutPage } from '../AboutPage';
 import { QuestionPage } from '../QuestionPage';

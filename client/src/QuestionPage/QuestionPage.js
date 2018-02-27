@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Doughnut } from 'react-chartjs';
 
 import { questionActions } from '../_actions';
 import { choiceActions } from '../_actions';
 
-import { Button, Input, List } from 'semantic-ui-react'
+import { Button, Input, List } from 'semantic-ui-react';
 
 
 class QuestionPage extends React.Component {
@@ -31,7 +32,7 @@ class QuestionPage extends React.Component {
 
 	handleOnChange(e) {
 		const { name, value } = e.target;
-		this.setState({ [name]: value })
+		this.setState({ [name]: value });
 	}
 
 	handleNewChoice(e) {
@@ -39,7 +40,7 @@ class QuestionPage extends React.Component {
 		const { newChoice } = this.state;
 
 		dispatch(choiceActions.addNewChoice(match.params.id, newChoice));
-		this.setState({ 'newChoice': '' })
+		this.setState({ 'newChoice': '' });
 	}
 
 	handleVoting(e) {
@@ -56,6 +57,16 @@ class QuestionPage extends React.Component {
 	render() {
 		const { match, question, choices } = this.props;
 		const { newChoice, voted } = this.state;
+
+		let data;
+		if (choices.items){
+			data = choices.items.map((choice) => {
+				return {
+					value: choice.votes,
+					label: choice.choice_text
+				};
+			});
+		}
 
 		return (
 			<div>
@@ -97,6 +108,7 @@ class QuestionPage extends React.Component {
 						}
 					</List>
 				}
+				{choices.items && <Doughnut data={data} />}
 			</div>
 		);
 	}

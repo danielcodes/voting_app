@@ -8,12 +8,13 @@ Frontend things
 [ ] look into refreshing the token, doing a re login when it expires
 
 DO NOW
--start replacing dummy landing page with the list of polls
+-give the page a make over
+--front page, nice viewing of the polls
+--a descriptive about page
+--separate choices to vote on to the left and place pie chart on the right
+--fix up my polls page to have the same style as the main page
 
--restrict adding new options to poll only to authenticated users
 -clean up warnings
-
--start looking into some graph library to add the pie chart / bar graphs
 
 
 Problems
@@ -35,12 +36,12 @@ User stories
 [x] As an authenticated user, I can delete polls that I decide I don't want anymore.
 [x] As an authenticated user, if I don't like the options on a poll, I can create a new option.
 
-[ ] As an unauthenticated or authenticated user, I can see the results of polls in chart form. 
+[x] As an unauthenticated or authenticated user, I can see the results of polls in chart form. 
 	(This could be implemented using Chart.js or Google Charts.)
 
 Stop and watch video again here
 
 These 2 feel redundant
-[ ] As an authenticated user, I can see the aggregate results of my polls.
-[ ] As an authenticated user, I can share my polls with my friends.
+[x] As an authenticated user, I can see the aggregate results of my polls.
+[x] As an authenticated user, I can share my polls with my friends.
 
