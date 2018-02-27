@@ -1,0 +1,10 @@
+.plain-link {
+	text-decoration: none;
+	color: black;
+}
+
+.plain-link:hover {
+	color: black;
+	font-weight: bolder;
+	text-decoration: underline;
+}

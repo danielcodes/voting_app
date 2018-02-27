@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { questionActions } from '../_actions';
+import { history } from '../_helpers';
+import './MyPolls.css';
 
-import { Button, List } from 'semantic-ui-react'
+import { Button, Grid, Header, List, Segment } from 'semantic-ui-react'
 
 
 class MyPollsPage extends React.Component {
@@ -12,11 +14,17 @@ class MyPollsPage extends React.Component {
 		super(props);
 
 		this.handleDeleteQuestion = this.handleDeleteQuestion.bind(this);
+		this.handleQuestionClick = this.handleQuestionClick.bind(this);
 	}
 
 	componentDidMount() {
 		let user = JSON.parse(localStorage.getItem('user')).user;
 		this.props.dispatch(questionActions.getUserQuestions(user.id));
+	}
+
+	handleQuestionClick(e) {
+		let ques_id = e.target.getAttribute('value');
+		history.push(`questions/${ques_id}`);
 	}
 
 	handleDeleteQuestion(e) {
@@ -28,25 +36,40 @@ class MyPollsPage extends React.Component {
 		const { questions }	= this.props;
 
 		return (
-			<div>
-				<h2>My polls</h2>
-				{questions.items &&
-					<List>
-						{questions.items.map((question, index) =>
-							<List.Item key={question.name}>
-								<List.Content as={Link} to={`questions/${question.id}`}> {question.name} </List.Content>
-								<Button
-									color='red'
-									size='mini'
-									content='Delete'
-									value={question.id}
-									onClick={this.handleDeleteQuestion}
-								/>
-							</List.Item>
-						)}
-					</List>
-				}
-			</div>
+			<Grid>
+				<Grid.Row centered colums={4}>
+					<Header as='h1' color='teal'>
+						My Polls
+					</Header>
+				</Grid.Row>
+
+				<Grid.Row centered columns={2}>
+					{questions.items &&
+						<Grid.Column>
+							<Segment.Group>
+								{questions.items.map((question, index) =>
+									<Segment clearing color='teal' key={question.id}>
+										<Link
+											className='plain-link'
+											to={`/questions/${question.id}`}>
+											{question.name}
+										</Link>
+
+										<Button
+											color='red'
+											size='mini'
+											content='Delete'
+											floated='right'
+											value={question.id}
+											onClick={this.handleDeleteQuestion}
+										/>
+									</Segment>
+								)}
+							</Segment.Group>
+						</Grid.Column>
+					}
+				</Grid.Row>
+			</Grid>
 		);
 	}
 }
