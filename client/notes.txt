@@ -9,7 +9,6 @@ Frontend things
 
 DO NOW
 -give the page a make over
---create new poll page
 --separate choices to vote on to the left and place pie chart on the right
 
 --add those nice loading transitions for segment when data is being loaded

@@ -3,3 +3,7 @@
 	font-weight: 900;
 	cursor: pointer;
 }
+
+.poll-item-disabled:hover {
+	cursor: not-allowed;
+}

@@ -5,7 +5,14 @@ import { Doughnut } from 'react-chartjs';
 import { questionActions } from '../_actions';
 import { choiceActions } from '../_actions';
 
-import { Button, Input, List } from 'semantic-ui-react';
+import {
+	Button,
+	Grid,
+	Header,
+	Input,
+	List,
+	Segment
+} from 'semantic-ui-react';
 
 
 class QuestionPage extends React.Component {
@@ -45,9 +52,15 @@ class QuestionPage extends React.Component {
 
 	handleVoting(e) {
 		e.preventDefault();
+		if(this.state.voted){
+			return;
+		}
 
 		const { dispatch } = this.props;
-		const { id, value } = e.target; // retrieve id and votes
+
+		// retrieve id and votes
+		const { id } = e.target;
+		const value = e.target.getAttribute('value');
 		const newCount = parseInt(value) + 1;
 
 		this.setState({ voted: true });
@@ -69,47 +82,60 @@ class QuestionPage extends React.Component {
 		}
 
 		return (
-			<div>
-				{question.item && <h1>{question.item.name}</h1>}
-				<h2>Choices are:</h2>
+			<Grid>
+				<Grid.Row centered colums={4}>
+					{question.item &&
+						<Header as='h1' color='teal'>
+							{question.item.name}
+						</Header>
+					}
+				</Grid.Row>
 
-				{choices.items &&
-					<List>
-						{choices.items.map((choice, index) =>
-							<List.Item key={choice.choice_text}>
-								{choice.choice_text} | Votes: {choice.votes}
+				<Grid.Row centered columns={4}>
+					<Grid.Column>
+						<Header as='h2' color='teal'>Choices are:</Header>
 
-								{!voted &&
-									<Button
-										color='teal'
-										size='small'
-										content='vote'
+						{choices.items &&
+							<Segment.Group>
+								{choices.items.map((choice, index) =>
+									<Segment
+										disabled={voted ? true : false}
+										key={choice.choice_text}
+										className={voted
+											? 'poll-item-disabled' : 'poll-item'}
 										id={choice.id}
 										value={choice.votes}
 										onClick={this.handleVoting}
-									/>}
-							</List.Item>
-						)}
-						{localStorage.getItem('user') &&
-							<List.Item>
-								<Input
-									name='newChoice'
-									placeholder='New Choice'
-									value={newChoice}
-									onChange={this.handleOnChange}
-								/>
-								<Button
-									color='teal'
-									size='mini'
-									content='Add'
-									onClick={this.handleNewChoice}
-								/>
-							</List.Item>
+										>
+										{choice.choice_text}
+									</Segment>
+								)}
+
+								{localStorage.getItem('user') && !voted &&
+									<Segment>
+										<Input
+											fluid
+											name='newChoice'
+											placeholder='New Choice'
+											action={
+												<Button
+												color='teal'
+												content='Add'
+												onClick={this.handleNewChoice}/>
+											}
+											value={newChoice}
+											onChange={this.handleOnChange}
+										/>
+									</Segment>
+								}
+							</Segment.Group>
 						}
-					</List>
-				}
-				{choices.items && <Doughnut data={data} />}
-			</div>
+					</Grid.Column>
+					<Grid.Column>
+						{choices.items && <Doughnut data={data} />}
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
 		);
 	}
 }
