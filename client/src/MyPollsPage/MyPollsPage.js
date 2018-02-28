@@ -36,7 +36,7 @@ class MyPollsPage extends React.Component {
 		const { questions }	= this.props;
 
 		return (
-			<Grid>
+			<Grid stackable>
 				<Grid.Row centered colums={4}>
 					<Header as='h1' color='teal'>
 						My Polls

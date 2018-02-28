@@ -39,18 +39,19 @@ class NewPollPage extends React.Component {
 		const { newPoll } = this.state;
 
 		return (
-			<Grid>
+			<Grid stackable>
 				<Grid.Row centered colums={4}>
 					<Header as='h1' color='teal'>
 						Create a new poll
 					</Header>
 				</Grid.Row>
 
-				<Grid.Row centered columns={3}>
+				<Grid.Row centered columns={2}>
 					<Grid.Column>
 						<Form>
 							<TextArea
 								autoHeight
+								rows={6}
 								name='newPoll'
 								placeholder='ie. Favorite pizza slice'
 								value={newPoll}

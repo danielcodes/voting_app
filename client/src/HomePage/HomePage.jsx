@@ -28,7 +28,7 @@ class HomePage extends React.Component {
 		const { user, users, questions } = this.props;
 
 		return (
-			<Grid>
+			<Grid stackable>
 				<Grid.Row centered colums={4}>
 					<Header as='h1' color='teal'>
 						Welcome to Pollster

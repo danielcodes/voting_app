@@ -51,11 +51,11 @@ class QuestionPage extends React.Component {
 	}
 
 	handleVoting(e) {
-		e.preventDefault();
 		if(this.state.voted){
 			return;
 		}
 
+		e.preventDefault();
 		const { dispatch } = this.props;
 
 		// retrieve id and votes
@@ -82,7 +82,7 @@ class QuestionPage extends React.Component {
 		}
 
 		return (
-			<Grid>
+			<Grid stackable>
 				<Grid.Row centered colums={4}>
 					{question.item &&
 						<Header as='h1' color='teal'>
@@ -91,7 +91,7 @@ class QuestionPage extends React.Component {
 					}
 				</Grid.Row>
 
-				<Grid.Row centered columns={4}>
+				<Grid.Row centered columns={3}>
 					<Grid.Column>
 						<Header as='h2' color='teal'>Choices are:</Header>
 
@@ -132,7 +132,10 @@ class QuestionPage extends React.Component {
 						}
 					</Grid.Column>
 					<Grid.Column>
-						{choices.items && <Doughnut data={data} />}
+						{choices.items &&
+							<Doughnut
+								data={data} height='400' width='400' />
+						}
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>
