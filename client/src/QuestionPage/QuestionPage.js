@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Doughnut } from 'react-chartjs';
 
+import { DoughnutLegend } from '../_components';
 import { questionActions } from '../_actions';
 import { choiceActions } from '../_actions';
 
@@ -10,6 +11,7 @@ import {
 	Grid,
 	Header,
 	Input,
+	Label,
 	List,
 	Segment
 } from 'semantic-ui-react';
@@ -22,7 +24,7 @@ class QuestionPage extends React.Component {
 
 		this.state = {
 			newChoice: '',
-			voted: false
+			voted: false,
 		};
 
 		this.handleOnChange = this.handleOnChange.bind(this);
@@ -32,7 +34,7 @@ class QuestionPage extends React.Component {
 
 	componentDidMount() {
 		const { match, dispatch } = this.props;
-		
+
 		dispatch(questionActions.getQuestion(match.params.id));
 		dispatch(choiceActions.getChoices(match.params.id));
 	}
@@ -71,7 +73,7 @@ class QuestionPage extends React.Component {
 		const { match, question, choices } = this.props;
 		const { newChoice, voted } = this.state;
 
-		let data;
+		let data, legend;
 		if (choices.items){
 			data = choices.items.map((choice) => {
 				return {
@@ -79,6 +81,10 @@ class QuestionPage extends React.Component {
 					label: choice.choice_text
 				};
 			});
+		}
+
+		if (Object.keys(this.refs).length > 0){
+			legend = this.refs.chart.getChart();
 		}
 
 		return (
@@ -129,14 +135,19 @@ class QuestionPage extends React.Component {
 									</Segment>
 								}
 							</Segment.Group>
-						}
+					}
 					</Grid.Column>
-					<Grid.Column>
-						{choices.items &&
+					{choices.items &&
+						<Grid.Column>
 							<Doughnut
-								data={data} height='400' width='400' />
-						}
-					</Grid.Column>
+								ref='chart' data={data} height='400' width='400' />
+								{voted &&
+									<Segment>
+										<DoughnutLegend chart={legend} />
+									</Segment>
+								}
+						</Grid.Column>
+					}
 				</Grid.Row>
 			</Grid>
 		);

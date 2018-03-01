@@ -1,1 +1,1 @@
-export * from '/.Doughnut';
+export * from './DoughnutLegend';

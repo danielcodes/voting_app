@@ -8,11 +8,8 @@ Frontend things
 [ ] look into refreshing the token, doing a re login when it expires
 
 DO NOW
--give the page a make over
---separate choices to vote on to the left and place pie chart on the right
-
---add those nice loading transitions for segment when data is being loaded
 --a descriptive about page
+--add those nice loading transitions for segment when data is being loaded
 
 -clean up warnings
 -a smudge renders when there is an option but not votes, fix that
