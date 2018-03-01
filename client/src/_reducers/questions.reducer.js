@@ -24,7 +24,7 @@ export function questions(state = {}, action) {
 			};
     case questionConstants.DEL_QUES_SUCCESS:
 			let updated = [];
-			let ques_id = parseInt(action.question);
+			let ques_id = parseInt(action.question, 10);
 			for(let i=0; i<state.items.length; i++){
 				if(state.items[i].id !== ques_id){
 					updated.push(state.items[i]);

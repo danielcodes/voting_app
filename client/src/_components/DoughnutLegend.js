@@ -13,8 +13,9 @@ class DoughnutLegend extends React.Component {
 				{segments.map((segment, index) =>
 					<List.Item key={index}>
 						<Label
-							style={{backgroundColor:segment.fillColor}}
-							horizontal>{segment.value}
+							style={{backgroundColor: segment.fillColor}}
+							horizontal>
+							{segment.value}
 						</Label>
 						{segment.label}
 					</List.Item>

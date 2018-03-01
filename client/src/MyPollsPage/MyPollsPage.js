@@ -6,7 +6,7 @@ import { questionActions } from '../_actions';
 import { history } from '../_helpers';
 import './MyPolls.css';
 
-import { Button, Grid, Header, List, Segment } from 'semantic-ui-react'
+import { Button, Grid, Header, Segment } from 'semantic-ui-react'
 
 
 class MyPollsPage extends React.Component {

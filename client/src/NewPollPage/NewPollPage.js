@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { questionActions } from '../_actions';
 
-import { Button, Form, Grid, Header, List, TextArea } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, TextArea } from 'semantic-ui-react'
 
 
 class NewPollPage extends React.Component {

@@ -31,11 +31,11 @@ function voteForChoice(id, count) {
 		choiceService.voteForChoice(id, count)
 			.then(
 				choice => {
-					dispatch(success(choice)),
-					dispatch(alertActions.success('Thanks for voting!'));
+					dispatch(success(choice))
+					//dispatch(alertActions.success('Thanks for voting!'));
 				},
 				error => {
-					dispatch(failure(error)),
+					dispatch(failure(error));
 					dispatch(alertActions.error(error));
 				}
 			);

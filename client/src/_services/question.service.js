@@ -72,7 +72,7 @@ function handleResponse(response) {
 	}
 
 	// On delete, server returns 204 and No Content statusText
-	if(response.status == 204 && response.statusText == 'No Content'){
+	if(response.status === 204 && response.statusText === 'No Content'){
 		return {};
 	}
 

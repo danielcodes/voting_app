@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userActions, questionActions } from '../_actions';
 import { history } from '../_helpers';
 
-import { Header, Grid, List, Segment } from 'semantic-ui-react';
+import { Header, Grid, Segment } from 'semantic-ui-react';
 
 import './HomePage.css';
 
@@ -25,7 +24,8 @@ class HomePage extends React.Component {
 	}
 
 	render() {
-		const { user, users, questions } = this.props;
+		// have user and users
+		const { questions } = this.props;
 
 		return (
 			<Grid stackable>

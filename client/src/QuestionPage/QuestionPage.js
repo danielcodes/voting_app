@@ -11,8 +11,6 @@ import {
 	Grid,
 	Header,
 	Input,
-	Label,
-	List,
 	Segment
 } from 'semantic-ui-react';
 
@@ -63,14 +61,14 @@ class QuestionPage extends React.Component {
 		// retrieve id and votes
 		const { id } = e.target;
 		const value = e.target.getAttribute('value');
-		const newCount = parseInt(value) + 1;
+		const newCount = parseInt(value, 10) + 1;
 
 		this.setState({ voted: true });
 		dispatch(choiceActions.voteForChoice(id, newCount));
 	}
 
 	render() {
-		const { match, question, choices } = this.props;
+		const { question, choices } = this.props;
 		const { newChoice, voted } = this.state;
 
 		let data, legend;
@@ -139,13 +137,8 @@ class QuestionPage extends React.Component {
 					</Grid.Column>
 					{choices.items &&
 						<Grid.Column>
-							<Doughnut
-								ref='chart' data={data} height='400' width='400' />
-								{voted &&
-									<Segment>
-										<DoughnutLegend chart={legend} />
-									</Segment>
-								}
+							<Doughnut ref='chart' data={data} height='400' width='400' />
+							{voted && <Segment><DoughnutLegend chart={legend} /></Segment>}
 						</Grid.Column>
 					}
 				</Grid.Row>

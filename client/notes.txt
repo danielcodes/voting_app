@@ -12,7 +12,6 @@ DO NOW
 --add those nice loading transitions for segment when data is being loaded
 
 -clean up warnings
--a smudge renders when there is an option but not votes, fix that
 
 
 Problems
