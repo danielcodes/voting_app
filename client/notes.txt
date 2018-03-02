@@ -4,8 +4,9 @@
 DO NOW
 -add those nice loading transitions for segment when data is being loaded
 --find where first
-
 -error handling for questions that don't exist, should throw 404
+
+==> can be put on hold
 
 
 Problems

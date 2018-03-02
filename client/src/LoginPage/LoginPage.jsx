@@ -45,47 +45,45 @@ class LoginPage extends React.Component {
 		const { username, password, submitted } = this.state;
 
 		return (
-			<div className='login-form'>
-				<Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-					<Grid.Column style={{ maxWidth: 450 }}>
-						<Header as='h2' color='teal' textAlign='center'>
-							Log-in to your account
-						</Header>
-						<Form size='large' onSubmit={this.handleSubmit}>
-							<Segment stacked>
-								<Form.Input fluid 
-									name='username' 
-									icon='user' 
-									iconPosition='left' 
-									placeholder='Username' 
-									value={username}
-									error={submitted && !username}
-									onChange={this.handleChange} 
-								/>
-								<Form.Input fluid 
-									name='password' 
-									icon='lock' 
-									iconPosition='left' 
-									placeholder='Password' 
-									type='password' 
-									value={password}
-									error={submitted && !password}
-									onChange={this.handleChange}
-								/>
-								<Button 
-									fluid 
-									type='submit' 
-									color='teal' 
-									size='large'
-									content='Login'
-									loading={loggingIn}
-								/>
-							</Segment>
-						</Form>
-						<Message>New user? <Link to='/signup'>Sign Up</Link></Message>
-					</Grid.Column>
-				</Grid>
-			</div>
+			<Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+				<Grid.Column style={{ maxWidth: 450 }}>
+					<Header as='h2' color='teal' textAlign='center'>
+						Log-in to your account
+					</Header>
+					<Form size='large' onSubmit={this.handleSubmit}>
+						<Segment stacked>
+							<Form.Input fluid
+								name='username'
+								icon='user'
+								iconPosition='left'
+								placeholder='Username'
+								value={username}
+								error={submitted && !username}
+								onChange={this.handleChange}
+							/>
+							<Form.Input fluid
+								name='password'
+								icon='lock'
+								iconPosition='left'
+								placeholder='Password'
+								type='password'
+								value={password}
+								error={submitted && !password}
+								onChange={this.handleChange}
+							/>
+							<Button
+								fluid
+								type='submit'
+								color='teal'
+								size='large'
+								content='Login'
+								loading={loggingIn}
+							/>
+						</Segment>
+					</Form>
+					<Message>New user? <Link to='/signup'>Sign Up</Link></Message>
+				</Grid.Column>
+			</Grid>
 		);
 	}
 }
