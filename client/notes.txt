@@ -2,11 +2,10 @@
 [ ] look into refreshing the token, doing a re login when it expires
 
 DO NOW
-[ ] highlight proper tab, stuck in home
-
-find where first
 -add those nice loading transitions for segment when data is being loaded
+--find where first
 
+-error handling for questions that don't exist, should throw 404
 
 
 Problems

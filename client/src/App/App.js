@@ -31,16 +31,20 @@ class App extends Component {
 		super(props);
 
 		const { dispatch } = this.props;
+		this.state = { activeItem: 'root' };
+
 		history.listen((location, action) => {
 			// clear alert on location change
 			dispatch(alertActions.clear());
 		});
 	}
 
+	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
 	render(){
-    const { alert } = this.props
-    const { fixed } = false
-		console.log(this);
+    const { alert } = this.props;
+    const { activeItem } = this.state;
+    const { fixed } = false;
 
 	  return (
 			<Router history={history}>
@@ -53,8 +57,18 @@ class App extends Component {
 						size='large'
 					>
 						<Container>
-							<Menu.Item as={Link} to="/" active>Home</Menu.Item>
-							<Menu.Item as={Link} to="/about" >About</Menu.Item>
+							<Menu.Item as={Link} to="/"
+								name='root'
+								content='Home'
+								active={activeItem === 'root'}
+								onClick={this.handleItemClick}
+							/>
+							<Menu.Item as={Link} to="/about"
+								name='aboutUs'
+								content='About'
+								active={activeItem === 'aboutUs'}
+								onClick={this.handleItemClick}
+							/>
 							{localStorage.getItem('user') ? (
 								<Menu.Item position='right'>
 									<Button as={Link} to="/new_poll" color="teal">New Poll</Button>
