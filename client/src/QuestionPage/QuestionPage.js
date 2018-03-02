@@ -136,9 +136,9 @@ class QuestionPage extends React.Component {
 					}
 					</Grid.Column>
 					{choices.items &&
-						<Grid.Column>
+						<Grid.Column textAlign='center'>
 							<Doughnut ref='chart' data={data} height='400' width='400' />
-							{voted && <Segment><DoughnutLegend chart={legend} /></Segment>}
+							{voted && <Segment textAlign='left'><DoughnutLegend chart={legend} /></Segment>}
 						</Grid.Column>
 					}
 				</Grid.Row>
