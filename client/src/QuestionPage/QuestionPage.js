@@ -23,6 +23,7 @@ class QuestionPage extends React.Component {
 		this.state = {
 			newChoice: '',
 			voted: false,
+			votedChoice: null,
 		};
 
 		this.handleOnChange = this.handleOnChange.bind(this);
@@ -63,13 +64,13 @@ class QuestionPage extends React.Component {
 		const value = e.target.getAttribute('value');
 		const newCount = parseInt(value, 10) + 1;
 
-		this.setState({ voted: true });
+		this.setState({ voted: true, votedChoice: parseInt(id, 10) });
 		dispatch(choiceActions.voteForChoice(id, newCount));
 	}
 
 	render() {
 		const { question, choices } = this.props;
-		const { newChoice, voted } = this.state;
+		const { newChoice, voted, votedChoice } = this.state;
 
 		let data, legend;
 		if (choices.items){
@@ -109,6 +110,8 @@ class QuestionPage extends React.Component {
 											? 'poll-item-disabled' : 'poll-item'}
 										id={choice.id}
 										value={choice.votes}
+										inverted={votedChoice === choice.id}
+										color={votedChoice === choice.id ? 'teal' : 'white'}
 										onClick={this.handleVoting}
 										>
 										{choice.choice_text}
