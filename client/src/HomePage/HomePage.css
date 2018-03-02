@@ -1,9 +1,9 @@
 .poll-item:hover {
-	background-color: teal;
-	font-weight: 900;
-	cursor: pointer;
+  background-color: teal;
+  font-weight: 900;
+  cursor: pointer;
 }
 
 .poll-item-disabled:hover {
-	cursor: not-allowed;
+  cursor: not-allowed;
 }

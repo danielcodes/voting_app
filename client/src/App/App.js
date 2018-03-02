@@ -40,6 +40,7 @@ class App extends Component {
 	render(){
     const { alert } = this.props
     const { fixed } = false
+		console.log(this);
 
 	  return (
 			<Router history={history}>

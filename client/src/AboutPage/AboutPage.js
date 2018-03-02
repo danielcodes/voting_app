@@ -22,7 +22,7 @@ class AboutPage extends React.Component {
 
 							Features of the application are:
 							<List bulleted>
-								<List.Item>You can create Polls to vote on</List.Item>
+								<List.Item>You can view Polls and vote on them</List.Item>
 								<List.Item>Results of the Polls are aggregated and shown in a doughnut chart</List.Item>
 								<List.Item>Authenticating opens up a few other features, ie. creating Polls and adding options to Polls</List.Item>
 							</List>

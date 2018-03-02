@@ -102,20 +102,21 @@ class QuestionPage extends React.Component {
 
 						{choices.items &&
 							<Segment.Group>
-								{choices.items.map((choice, index) =>
-									<Segment
-										disabled={voted ? true : false}
+								{choices.items.map((choice, index) => {
+									let extras = votedChoice === choice.id ?
+										{'color' : 'teal', 'inverted': true} : {};
+									return <Segment
+										disabled={voted && votedChoice !== choice.id ? true : false}
 										key={choice.choice_text}
-										className={voted
-											? 'poll-item-disabled' : 'poll-item'}
+										className={voted ? 'poll-item-disabled' : 'poll-item'}
 										id={choice.id}
 										value={choice.votes}
-										inverted={votedChoice === choice.id}
-										color={votedChoice === choice.id ? 'teal' : 'white'}
 										onClick={this.handleVoting}
+										{...extras}
 										>
 										{choice.choice_text}
 									</Segment>
+									}
 								)}
 
 								{localStorage.getItem('user') && !voted &&
