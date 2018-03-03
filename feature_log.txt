@@ -13,3 +13,5 @@ Voting App
 
 ===============================================================================================
 
+Start looking into deployment, once backend is tidied up
+

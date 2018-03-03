@@ -7,9 +7,12 @@ Things that I need to build out
 [x] Extend signature time, too short
 [x] Add in the backend for creating polls and options
 [x] create custom route for '/questions/:id/choices' to get question choices
+[x] Return the username when a user request the JWT, not just the token
 
-
-[ ] Return the username when a user request the JWT, not just the token
+DO NOW
+[x] Switch out the DB to Postgres
+[ ] Rewrite views to a more robust form, without viewsets and routers
+    --write unit tests which will help prep for cuny codes workshop
 
 =====================================================================
 
@@ -26,5 +29,30 @@ Before making the request, need to set up two env variables,
 
 You are set, make request with
 'http --auth-type=jwt -v <url> <args>'
+
+=====================================================================
+
+Moving the DB from Sqlite to Postgres
+-First need to switch to 'postgres' user, 'sudo -u postgres -i', then run 'psql'
+-create a user with, '# CREATE USER name;'
+--already had user, changed pw, '# ALTER USER user_name WITH PASSWORD 'new_password';'
+-create database with, ''# CREATE DATABASE db_name OWNER name;''
+-change settings in Django to:
+```
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'myproject',
+		'USER': 'myprojectuser',
+		'PASSWORD': 'password',
+		'HOST': 'localhost',
+		'PORT': '',
+	}
+```
+
+Once the DB has been created,
+-dumpdata in current DB to to a json file
+-run 'python manage.py migrate --run-syncdb'
+-open up shell and delete contenttypes
+-load the old data into the new DB
 
 =====================================================================
