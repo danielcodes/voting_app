@@ -17,8 +17,8 @@ class QuestionTests(APITestCase):
             email='dan@example.com',
             password='password'
         )
-        Question.objects.create(name='Test question 1', owner=self.user)
-        Question.objects.create(name='Test question 2', owner=self.user)
+        self.q1 = Question.objects.create(name='Test question 1', owner=self.user)
+        self.q2 = Question.objects.create(name='Test question 2', owner=self.user)
 
     def test_get_questions(self):
         """ Get all questions
@@ -44,3 +44,23 @@ class QuestionTests(APITestCase):
         response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_question_by_valid_id(self):
+        url = reverse('get_delete_question', kwargs={'pk': self.q1.pk})
+        response = self.client.get(url, format='json')
+        serializer = QuestionSerializer(self.q1)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_get_question_by_invalid_id(self):
+        url = reverse('get_delete_question', kwargs={'pk': 10})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_question(self):
+        url = reverse('get_delete_question', kwargs={'pk': self.q2.pk})
+        response = self.client.delete(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
