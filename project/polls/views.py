@@ -64,13 +64,20 @@ class QuestionsByUser(APIView):
         return Response(serializer.data)
 
 
-@api_view(['GET'])
-def choices_list(request, pk):
-    """ Returns choices corresponding to a question
+class QuestionChoices(APIView):
+    """ Returns choices of a question
     """
-    queryset = Choice.objects.filter(question__pk=pk)
-    serializer = ChoiceSerializer(queryset, many=True)
-    return Response(serializer.data)
+    def get_question(self, pk):
+        try:
+            return Question.objects.get(pk=pk)
+        except Question.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        q = self.get_question(pk)
+        choices = Choice.objects.filter(question=q)
+        serializer = ChoiceSerializer(choices, many=True)
+        return Response(serializer.data)
 
 
 # class ChoiceViewSet(viewsets.ModelViewSet):

@@ -54,7 +54,7 @@ class QuestionTests(APITestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_get_question_by_invalid_id(self):
-        url = reverse('get_delete_question', kwargs={'pk': 10})
+        url = reverse('get_delete_question', kwargs={'pk': 0})
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
@@ -94,7 +94,36 @@ class QuestionsByUserTests(APITestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_get_user_questions_invalid(self):
-        url = reverse('questions_by_user', kwargs={'pk': 10})
+        url = reverse('questions_by_user', kwargs={'pk': 0})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class QuestionChoicesTests(APITestCase):
+
+    def setUp(self):
+        self.user = User.objects.create(
+            username='dan',
+            email='dan@example.com',
+            password='password'
+        )
+        self.q1 = Question.objects.create(name='Test question 1', owner=self.user)
+        Choice.objects.create(question=self.q1, choice_text='Blah 1')
+        Choice.objects.create(question=self.q1, choice_text='Blah 2')
+
+    def test_get_choices_for_question_valid(self):
+        url = reverse('question_choices', kwargs={'pk': self.q1.pk})
+        response = self.client.get(url, format='json')
+        choices = Choice.objects.filter(question=self.q1)
+        serializer = ChoiceSerializer(choices, many=True)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(choices.count(), 2)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_get_choices_for_question_invalid(self):
+        url = reverse('question_choices', kwargs={'pk': 0})
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
