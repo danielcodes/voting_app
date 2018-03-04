@@ -4,11 +4,20 @@ from polls.serializers import QuestionSerializer, ChoiceSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
+# class QuestionViewSet(viewsets.ModelViewSet):
+    # queryset = Question.objects.all()
+    # serializer_class = QuestionSerializer
+
+class QuestionList(APIView):
+    """ List all questions, or create new question
+    """
+    def get(self, request, format=None):
+        questions = Question.objects.all()
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -29,6 +38,6 @@ def user_questions_list(request, pk):
     return Response(serializer.data)
 
 
-class ChoiceViewSet(viewsets.ModelViewSet):
-    queryset = Choice.objects.all()
-    serializer_class = ChoiceSerializer
+# class ChoiceViewSet(viewsets.ModelViewSet):
+    # queryset = Choice.objects.all()
+    # serializer_class = ChoiceSerializer

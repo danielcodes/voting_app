@@ -14,6 +14,25 @@ DO NOW
 [ ] Rewrite views to a more robust form, without viewsets and routers
     --write unit tests which will help prep for cuny codes workshop
 
+Endpoints needed (6)
+/questions - get all questions, create a question
+GET
+POST - needs auth
+/questions/<id> - get/delete a question
+GET
+DELETE - only owner can delete question
+/questions/<id>/choices - get the choices of a question
+GET
+/questions/user/<user_id> - get the questions created by a user
+GET
+
+/choices - create a choice
+POST - needs auth
+/choices/<id> - update a choice (for voting)
+PATCH
+
+After REST API rewrite -> deploying the API
+
 =====================================================================
 
 Testing the API with httpie
