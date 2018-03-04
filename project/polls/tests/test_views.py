@@ -64,3 +64,37 @@ class QuestionTests(APITestCase):
         response = self.client.delete(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+
+class QuestionsByUserTests(APITestCase):
+
+    def setUp(self):
+        self.user_1 = User.objects.create(
+            username='dan',
+            email='dan@example.com',
+            password='password'
+        )
+        self.user_2 = User.objects.create(
+            username='ron',
+            email='ron@example.com',
+            password='password'
+        )
+        self.q1 = Question.objects.create(name='Test question 1', owner=self.user_1)
+        self.q2 = Question.objects.create(name='Test question 2', owner=self.user_1)
+        self.q3 = Question.objects.create(name='Test question 3', owner=self.user_2)
+
+    def test_get_user_questions_valid(self):
+        url = reverse('questions_by_user', kwargs={'pk': self.user_1.pk})
+        response = self.client.get(url, format='json')
+        questions = Question.objects.filter(owner=self.user_1)
+        serializer = QuestionSerializer(questions, many=True)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(questions.count(), 2)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_get_user_questions_invalid(self):
+        url = reverse('questions_by_user', kwargs={'pk': 10})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

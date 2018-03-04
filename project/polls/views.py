@@ -1,4 +1,5 @@
 
+from django.contrib.auth.models import User
 from django.http import Http404
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
@@ -46,21 +47,29 @@ class QuestionItem(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+
+class QuestionsByUser(APIView):
+    """ Returns questions owned by a user
+    """
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        user = self.get_user(pk)
+        questions = Question.objects.filter(owner=user)
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
+
+
 @api_view(['GET'])
 def choices_list(request, pk):
     """ Returns choices corresponding to a question
     """
     queryset = Choice.objects.filter(question__pk=pk)
     serializer = ChoiceSerializer(queryset, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def user_questions_list(request, pk):
-    """ Returns questions owned by a user
-    """
-    queryset = Question.objects.filter(owner=pk)
-    serializer = QuestionSerializer(queryset, many=True)
     return Response(serializer.data)
 
 
