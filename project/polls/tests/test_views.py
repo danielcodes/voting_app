@@ -127,3 +127,42 @@ class QuestionChoicesTests(APITestCase):
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+class ChoiceTests(APITestCase):
+
+    def setUp(self):
+        self.user = User.objects.create(
+            username='dan',
+            email='dan@example.com',
+            password='password'
+        )
+        self.q1 = Question.objects.create(name='Test question 1', owner=self.user)
+        Choice.objects.create(question=self.q1, choice_text='Blah 1')
+        Choice.objects.create(question=self.q1, choice_text='Blah 2')
+
+    def test_get_choices(self):
+        """ Get all choices
+        """
+        url = reverse('choices')
+        response = self.client.get(url, format='json')
+        choices = Choice.objects.all()
+        serializer = ChoiceSerializer(choices, many=True)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(choices.count(), 2)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_create_choice_valid_data(self):
+        url = reverse('choices')
+        data = {'choice_text': 'Blah 3', 'question': self.q1.pk}
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_choice_invalid_data(self):
+        url = reverse('choices')
+        data = {'choice_text': '', 'question': self.q1.pk}
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
