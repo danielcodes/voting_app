@@ -11,8 +11,33 @@ Things that I need to build out
 
 DO NOW
 [x] Switch out the DB to Postgres
-[ ] Rewrite views to a more robust form, without viewsets and routers
+[x] Rewrite views to a more robust form, without viewsets and routers
     --write unit tests which will help prep for cuny codes workshop
+[ ] Add in permissions to block certain parts of the API
+[ ] Add pagination
+
+TEST OUT THE APP AS A WHOLE WITH THE NEW REWRITE**
+
+
+Endpoints needed (6)
+/questions - get all questions, create a question
+GET, POST - needs auth** - done
+
+/questions/<id> - get/delete a question
+GET, DELETE - only owner can delete question** - done
+
+/questions/user/<user_id> - get the questions created by a user
+GET
+/questions/<id>/choices - get the choices of a question
+GET
+
+/choices - create a choice
+GET, POST - needs auth** - done
+
+/choices/<id> - update a choice (for voting)
+GET, PATCH, DELETE
+
+After REST API rewrite -> deploying the API
 
 =====================================================================
 
@@ -54,5 +79,15 @@ Once the DB has been created,
 -run 'python manage.py migrate --run-syncdb'
 -open up shell and delete contenttypes
 -load the old data into the new DB
+
+=====================================================================
+
+Forgot to take care of users routes so they broke
+Getting an ugly error when the routes are not named, 'user-list' and 'user-detail' respectively
+
+ImproperlyConfigured at /users/
+Could not resolve URL for hyperlinked relationship using view name "user-detail". You may have failed to include the related model in your API, or incorrectly configured the `lookup_field` attribute on this field.
+
+Has to do with the serializer being a hyperlinkedmodel and me not defining how to get to the url
 
 =====================================================================
