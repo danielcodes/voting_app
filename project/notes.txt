@@ -21,10 +21,10 @@ TEST OUT THE APP AS A WHOLE WITH THE NEW REWRITE**
 
 Endpoints needed (6)
 /questions - get all questions, create a question
-GET, POST - needs auth**
+GET, POST - needs auth** - done
 
 /questions/<id> - get/delete a question
-GET, DELETE - only owner can delete question**
+GET, DELETE - only owner can delete question** - done
 
 /questions/user/<user_id> - get the questions created by a user
 GET
@@ -32,7 +32,7 @@ GET
 GET
 
 /choices - create a choice
-GET, POST - needs auth**
+GET, POST - needs auth** - done
 
 /choices/<id> - update a choice (for voting)
 GET, PATCH, DELETE

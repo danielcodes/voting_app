@@ -17,6 +17,7 @@ class QuestionTests(APITestCase):
             email='dan@example.com',
             password='password'
         )
+        self.client.force_authenticate(user=self.user)
         self.q1 = Question.objects.create(name='Test question 1', owner=self.user)
         self.q2 = Question.objects.create(name='Test question 2', owner=self.user)
 
@@ -137,6 +138,7 @@ class ChoiceTests(APITestCase):
             email='dan@example.com',
             password='password'
         )
+        self.client.force_authenticate(user=self.user)
         self.q1 = Question.objects.create(name='Test question 1', owner=self.user)
         self.c1 = Choice.objects.create(question=self.q1, choice_text='Blah 1')
         self.c2 = Choice.objects.create(question=self.q1, choice_text='Blah 2')

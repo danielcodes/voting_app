@@ -1,14 +1,17 @@
 
 from django.contrib.auth.models import User
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from rest_framework import status
 
 from polls.models import Question, Choice
+from polls.permissions import IsOwnerOrReadOnly
 from polls.serializers import QuestionSerializer, ChoiceSerializer
 
 
@@ -24,6 +27,8 @@ def api_root(request, format=None):
 class QuestionList(APIView):
     """ List all questions, or create new question
     """
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
     def get(self, request, format=None):
         questions = Question.objects.all()
         serializer = QuestionSerializer(questions, many=True)
@@ -40,11 +45,15 @@ class QuestionList(APIView):
 class QuestionItem(APIView):
     """ Get or delete a single question
     """
+    permission_classes = (
+        IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
+
     def get_object(self, pk):
-        try:
-            return Question.objects.get(pk=pk)
-        except Question.DoesNotExist:
-            raise Http404
+        obj = get_object_or_404(Question, pk=pk)
+        self.check_object_permissions(self.request, obj)
+        return obj
 
     def get(self, request, pk, format=None):
         question = self.get_object(pk)
@@ -92,6 +101,8 @@ class QuestionChoices(APIView):
 class ChoiceList(APIView):
     """ List all choices, or create new choice
     """
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
     def get(self, request, format=None):
         choices = Choice.objects.all()
         serializer = ChoiceSerializer(choices, many=True)
