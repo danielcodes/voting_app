@@ -98,23 +98,26 @@ class ChoiceList(APIView):
 class ChoiceItem(APIView):
     """ Get, patch or delete a choice
     """
-    # def get_object(self, pk):
-        # try:
-            # return Question.objects.get(pk=pk)
-        # except Question.DoesNotExist:
-            # raise Http404
+    def get_object(self, pk):
+        try:
+            return Choice.objects.get(pk=pk)
+        except Choice.DoesNotExist:
+            raise Http404
 
     def get(self, request, pk, format=None):
-#         question = self.get_object(pk)
-        # serializer = QuestionSerializer(question)
-        # return Response(serializer.data)
-        return Response({})
+        choice = self.get_object(pk)
+        serializer = ChoiceSerializer(choice)
+        return Response(serializer.data)
 
     def patch(self, request, pk, format=None):
-        return Response({})
+        choice = self.get_object(pk)
+        serializer = ChoiceSerializer(choice, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        # question = self.get_object(pk)
-        # question.delete()
-        # return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response({})
+        choice = self.get_object(pk)
+        choice.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

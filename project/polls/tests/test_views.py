@@ -138,8 +138,8 @@ class ChoiceTests(APITestCase):
             password='password'
         )
         self.q1 = Question.objects.create(name='Test question 1', owner=self.user)
-        Choice.objects.create(question=self.q1, choice_text='Blah 1')
-        Choice.objects.create(question=self.q1, choice_text='Blah 2')
+        self.c1 = Choice.objects.create(question=self.q1, choice_text='Blah 1')
+        self.c2 = Choice.objects.create(question=self.q1, choice_text='Blah 2')
 
     def test_get_choices(self):
         """ Get all choices
@@ -166,3 +166,39 @@ class ChoiceTests(APITestCase):
         response = self.client.post(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_choice_by_valid_id(self):
+        url = reverse('get_choice', kwargs={'pk': self.c1.pk})
+        response = self.client.get(url, format='json')
+        serializer = ChoiceSerializer(self.c1)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_get_choice_by_invalid_id(self):
+        url = reverse('get_choice', kwargs={'pk': 0})
+        response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_patch_choice_valid(self):
+        data = {'votes': self.c1.votes+1} # bump up a vote
+        url = reverse('get_choice', kwargs={'pk': self.c1.pk})
+        response = self.client.patch(url, data, format='json')
+        serializer = ChoiceSerializer(self.c1)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data.get('votes'), serializer.data.get('votes')+1)
+
+    def test_patch_choice_invalid(self):
+        data = {'votes': ''}
+        url = reverse('get_choice', kwargs={'pk': self.c1.pk})
+        response = self.client.patch(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_delete_choice(self):
+        url = reverse('get_choice', kwargs={'pk': self.c2.pk})
+        response = self.client.delete(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
