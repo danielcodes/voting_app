@@ -9,7 +9,7 @@ export const choiceService = {
 function addNewChoice(id, text) {
 	const requestOptions = {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
+		headers: authHeader(),
 		body: JSON.stringify({
 			question: id,
 			choice_text: text
@@ -24,7 +24,7 @@ function addNewChoice(id, text) {
 function voteForChoice(id, count) {
 	const requestOptions = {
 		method: 'PATCH',
-		headers: { 'Content-Type': 'application/json' },
+		headers: authHeader(),
 		body: JSON.stringify({ votes: count })
 	};
 

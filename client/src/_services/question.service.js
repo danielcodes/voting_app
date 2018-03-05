@@ -14,7 +14,7 @@ function addQuestion(question) {
 
 	const requestOptions = {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
+		headers: authHeader(),
 		body: JSON.stringify({
 			name: question,
 			owner: user.id
