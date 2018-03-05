@@ -4,11 +4,21 @@ from django.http import Http404
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from rest_framework import status
 
 from polls.models import Question, Choice
 from polls.serializers import QuestionSerializer, ChoiceSerializer
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('users', request=request, format=format),
+        'questions': reverse('questions', request=request, format=format),
+        'choices': reverse('choices', request=request, format=format)
+    })
 
 
 class QuestionList(APIView):
