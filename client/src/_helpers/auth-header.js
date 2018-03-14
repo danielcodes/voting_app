@@ -8,6 +8,8 @@ export function authHeader() {
 			'Content-Type': 'application/json'
 		};
 	} else {
-		return {};
+		return {
+			'Content-Type': 'application/json'
+		};
 	}
 }

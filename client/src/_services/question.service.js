@@ -62,8 +62,9 @@ function getAll() {
 		method: 'GET',
 		headers: authHeader()
 	};
+	const url = '/questions/';
 
-	return fetch('/questions/', requestOptions).then(handleResponse);
+	return fetch(url, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

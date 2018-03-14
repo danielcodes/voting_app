@@ -13,8 +13,9 @@ function login(username, password) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, password })
 	};
+	const url = '/auth/jwt/create/';
 
-	return fetch('/auth/jwt/create/', requestOptions)
+	return fetch(url, requestOptions)
 		.then(response => {
 			if (!response.ok) { 
 				return Promise.reject(response.statusText);
@@ -39,8 +40,9 @@ function signUp(username, email, password) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, email, password })
 	};
+	const url = '/auth/users/create';
 
-	return fetch('/auth/users/create/', requestOptions)
+	return fetch(url, requestOptions)
 		.then(response => {
 			if (!response.ok) { 
 				return Promise.reject(response.statusText);
@@ -60,8 +62,9 @@ function getAll() {
 		method: 'GET',
 		headers: authHeader()
 	};
+	const url = '/users/';
 
-	return fetch('/users/', requestOptions).then(handleResponse);
+	return fetch(url, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
