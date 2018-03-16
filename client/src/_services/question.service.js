@@ -21,7 +21,7 @@ function addQuestion(question) {
 		})
 	};
 
-	const url = `api/questions/`;
+	const url = `/api/questions/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -31,7 +31,7 @@ function deleteQuestion(id) {
 		method: 'DELETE',
 		headers: authHeader()
 	};
-	const url = `api/questions/${id}/`;
+	const url = `/api/questions/${id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -41,7 +41,7 @@ function getQuestion(id) {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = `api/questions/${id}/`;
+	const url = `/api/questions/${id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -52,7 +52,7 @@ function getUserQuestions(user_id) {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = `api/questions/user/${user_id}/`;
+	const url = `/api/questions/user/${user_id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -62,7 +62,7 @@ function getAll() {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = 'api/questions/';
+	const url = '/api/questions/';
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
