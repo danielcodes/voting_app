@@ -16,7 +16,7 @@ function addNewChoice(id, text) {
 		})
 	};
 
-	const url = `/choices/`;
+	const url = `api/choices/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -28,7 +28,7 @@ function voteForChoice(id, count) {
 		body: JSON.stringify({ votes: count })
 	};
 
-	const url = `/choices/${id}/`;
+	const url = `api/choices/${id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -38,7 +38,7 @@ function getChoices(id) {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = `/questions/${id}/choices`;
+	const url = `api/questions/${id}/choices`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }

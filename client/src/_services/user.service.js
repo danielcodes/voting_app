@@ -13,7 +13,7 @@ function login(username, password) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, password })
 	};
-	const url = '/auth/jwt/create/';
+	const url = 'api/auth/jwt/create/';
 
 	return fetch(url, requestOptions)
 		.then(response => {
@@ -40,7 +40,7 @@ function signUp(username, email, password) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, email, password })
 	};
-	const url = '/auth/users/create';
+	const url = 'api/auth/users/create';
 
 	return fetch(url, requestOptions)
 		.then(response => {
@@ -62,7 +62,7 @@ function getAll() {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = '/users/';
+	const url = 'api/users/';
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
