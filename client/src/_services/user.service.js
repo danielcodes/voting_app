@@ -40,7 +40,7 @@ function signUp(username, email, password) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, email, password })
 	};
-	const url = 'api/auth/users/create';
+	const url = 'api/auth/users/create/';
 
 	return fetch(url, requestOptions)
 		.then(response => {

@@ -38,7 +38,7 @@ function getChoices(id) {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = `api/questions/${id}/choices`;
+	const url = `api/questions/${id}/choices/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }

@@ -31,7 +31,7 @@ function deleteQuestion(id) {
 		method: 'DELETE',
 		headers: authHeader()
 	};
-	const url = `api/questions/${id}`;
+	const url = `api/questions/${id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
@@ -41,7 +41,7 @@ function getQuestion(id) {
 		method: 'GET',
 		headers: authHeader()
 	};
-	const url = `api/questions/${id}`;
+	const url = `api/questions/${id}/`;
 
 	return fetch(url, requestOptions).then(handleResponse);
 }
