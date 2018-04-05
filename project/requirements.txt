@@ -3,5 +3,7 @@ django-templated-mail==1.1.1
 djangorestframework==3.7.7
 djangorestframework-jwt==1.11.0
 djoser==1.1.5
+gunicorn==19.7.1
+psycopg2==2.7.4
 PyJWT==1.5.3
 pytz==2017.3
