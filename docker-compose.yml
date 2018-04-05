@@ -1,0 +1,35 @@
+version: '3.5'
+
+# define services
+# frontend and backend
+# in the nginx config file of the frontend
+# have the requests to /api proxied to the backend
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+  backend:
+    container_name: backend
+    build: ./project
+    command: ["./start.sh"]
+    ports:
+      - '8000:8000'
+    links:
+      - db
+    depends_on:
+      - db
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile-prod
+    ports:
+      - '80:80'
+    links:
+      - backend

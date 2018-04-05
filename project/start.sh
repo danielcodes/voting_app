@@ -6,4 +6,5 @@
 	#--bind 0.0.0.0:8000 \
    # --workers 3
 
+python manage.py runserver migrate
 python manage.py runserver 0.0.0.0:8000
