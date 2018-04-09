@@ -2,3 +2,5 @@
 
 .coverage
 htmlcov/
+
+geckodriver.log
